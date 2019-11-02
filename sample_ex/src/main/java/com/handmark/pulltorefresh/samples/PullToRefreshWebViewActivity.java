@@ -38,7 +38,7 @@ public final class PullToRefreshWebViewActivity extends Activity {
 
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		mWebView.setWebViewClient(new SampleWebViewClient());
-		mWebView.loadUrl("http://www.google.com");
+		mWebView.loadUrl("https://www.baidu.com");
 
 	}
 

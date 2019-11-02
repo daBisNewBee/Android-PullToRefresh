@@ -113,7 +113,7 @@ public final class PullToRefreshListActivity extends ListActivity {
 		protected String[] doInBackground(Void... params) {
 			// Simulates a background job.
 			try {
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 			}
 			return mStrings;

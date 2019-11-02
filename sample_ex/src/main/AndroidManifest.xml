@@ -55,6 +55,7 @@
             android:name=".PullToRefreshWebView2Activity"
             android:label="PtR WebView Advanced" >
         </activity>
+        <activity android:name=".MyActivity"/>
     </application>
 
 </manifest>

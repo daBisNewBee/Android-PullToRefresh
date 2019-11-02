@@ -20,10 +20,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.extras.viewpager.PullToRefreshViewPager;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -47,6 +49,7 @@ public class PullToRefreshViewPagerActivity extends Activity implements OnRefres
 
 	@Override
 	public void onRefresh(PullToRefreshBase<ViewPager> refreshView) {
+		Log.d("test", "PullToRefreshViewPagerActivity onRefresh() called with: refreshView = [" + refreshView + "]");
 		new GetDataTask().execute();
 	}
 
@@ -62,11 +65,15 @@ public class PullToRefreshViewPagerActivity extends Activity implements OnRefres
 
 		@Override
 		public View instantiateItem(ViewGroup container, int position) {
+			TextView textView = new TextView(container.getContext());
+			textView.setTextSize(20);
+			textView.setText("位置：" + position);
 			ImageView imageView = new ImageView(container.getContext());
 			imageView.setImageResource(sDrawables[position]);
 
 			// Now just add ImageView to ViewPager and return it
 			container.addView(imageView, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+			container.addView(textView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
 			return imageView;
 		}
@@ -88,7 +95,7 @@ public class PullToRefreshViewPagerActivity extends Activity implements OnRefres
 		protected Void doInBackground(Void... params) {
 			// Simulates a background job.
 			try {
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 			}
 			return null;

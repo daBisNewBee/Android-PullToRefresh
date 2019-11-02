@@ -80,13 +80,15 @@ public final class PullToRefreshGridActivity extends Activity {
 		mGridView.setAdapter(mAdapter);
 	}
 
+	private static boolean isLoad = false;
+
 	private class GetDataTask extends AsyncTask<Void, Void, String[]> {
 
 		@Override
 		protected String[] doInBackground(Void... params) {
 			// Simulates a background job.
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
 			return mStrings;
@@ -95,7 +97,10 @@ public final class PullToRefreshGridActivity extends Activity {
 		@Override
 		protected void onPostExecute(String[] result) {
 			mListItems.addFirst("Added after refresh...");
-			mListItems.addAll(Arrays.asList(result));
+			if (!isLoad) {
+				mListItems.addAll(Arrays.asList(result));
+				isLoad = true;
+			}
 			mAdapter.notifyDataSetChanged();
 
 			// Call onRefreshComplete when the list has been refreshed.

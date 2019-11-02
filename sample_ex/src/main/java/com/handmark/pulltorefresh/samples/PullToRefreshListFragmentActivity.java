@@ -17,6 +17,7 @@ package com.handmark.pulltorefresh.samples;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Random;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -78,7 +79,7 @@ public final class PullToRefreshListFragmentActivity extends FragmentActivity im
 		protected String[] doInBackground(Void... params) {
 			// Simulates a background job.
 			try {
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 			}
 			return mStrings;
@@ -86,7 +87,9 @@ public final class PullToRefreshListFragmentActivity extends FragmentActivity im
 
 		@Override
 		protected void onPostExecute(String[] result) {
-			mListItems.addFirst("Added after refresh...");
+//			mListItems.addFirst(Utlis.getCurTimeHumanable());
+			int randomIndex = new Random().nextInt(mListItems.size());
+			mListItems.add(randomIndex, "index:" + randomIndex + " " + Utlis.getCurTimeHumanable());
 			mAdapter.notifyDataSetChanged();
 
 			// Call onRefreshComplete when the list has been refreshed.
