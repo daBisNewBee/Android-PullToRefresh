@@ -22,11 +22,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.samples.custom.PTRMyLInearLayoutActivity;
+
 public class LauncherActivity extends ListActivity {
 
 	public static final String[] options = { "ListView", "ExpandableListView", "GridView", "WebView", "ScrollView",
 			"Horizontal ScrollView", "ViewPager", "ListView Fragment", "WebView Advanced", "ListView in ViewPager",
-			"自定义"
+			"试用PTR", "自定义PTR"
 	};
 
 	@Override
@@ -74,6 +76,10 @@ public class LauncherActivity extends ListActivity {
 			case 10:
 				intent = new Intent(this, MyActivity.class);
 				break;
+			case 11:
+				intent = new Intent(this, PTRMyLInearLayoutActivity.class);
+				break;
+
 		}
 
 		startActivity(intent);

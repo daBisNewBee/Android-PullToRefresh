@@ -391,6 +391,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 			if (mRefreshableView.getFirstVisiblePosition() <= 1) {
 				final View firstVisibleChild = mRefreshableView.getChildAt(0);
 				if (firstVisibleChild != null) {
+					// 只有当第一项的顶部到达父布局的顶部，isReadyForPullStart才会返回true，
 					return firstVisibleChild.getTop() >= mRefreshableView.getTop();
 				}
 			}

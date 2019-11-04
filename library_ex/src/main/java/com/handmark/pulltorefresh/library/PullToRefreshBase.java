@@ -224,6 +224,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	@Override
 	public final boolean onInterceptTouchEvent(MotionEvent event) {
+		Log.d("test", "onInterceptTouchEvent() called with: event = [" + event + "]");
 
 		if (!isPullToRefreshEnabled()) {
 			return false;
@@ -308,6 +309,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	@Override
 	public final boolean onTouchEvent(MotionEvent event) {
+		Log.d("test", "onTouchEvent() called with: event = [" + event + "]");
 
 		if (!isPullToRefreshEnabled()) {
 			return false;
@@ -327,6 +329,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 				if (mIsBeingDragged) {
 					mLastMotionY = event.getY();
 					mLastMotionX = event.getX();
+					Log.d("test", "onTouchEvent: pullEvent..");
 					pullEvent();
 					return true;
 				}
@@ -337,6 +340,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 				if (isReadyForPull()) {
 					mLastMotionY = mInitialMotionY = event.getY();
 					mLastMotionX = mInitialMotionX = event.getX();
+					Log.d("test", "onTouchEvent: ACTION_DOWN.");
 					return true;
 				}
 				break;
@@ -350,11 +354,13 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 					if (mState == State.RELEASE_TO_REFRESH
 							&& (null != mOnRefreshListener || null != mOnRefreshListener2)) {
 						setState(State.REFRESHING, true);
+						Log.d("test", "onTouchEvent: setState REFRESHING.");
 						return true;
 					}
 
 					// If we're already refreshing, just scroll back to the top
 					if (isRefreshing()) {
+						Log.d("test", "onTouchEvent: smoothScrollTo 0.");
 						smoothScrollTo(0);
 						return true;
 					}

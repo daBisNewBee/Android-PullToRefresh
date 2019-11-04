@@ -136,6 +136,10 @@ public class MyActivity extends Activity implements PullToRefreshBase.OnRefreshL
             mArrayAdapter.notifyDataSetChanged();
             //  1. refresh 完了之后要把 pull view hide 起来
             //  2. 必须异步调用！同步调用头部动画不会消失！
+            boolean isUIThread = Thread.currentThread().getId()
+                    == Looper.getMainLooper().getThread().getId();
+            Log.d("test", "onPostExecute: isUIThread:" + isUIThread);
+            // true： 实际就是在UI线程更新完成状态的！只是耗时操作需要在子线程中完成！
             mPullToRefreshListView.onRefreshComplete();
             super.onPostExecute(strings);
         }
